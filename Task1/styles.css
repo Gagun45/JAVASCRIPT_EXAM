@@ -1,0 +1,90 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+}
+body {
+    background-color: lightgray;
+}
+
+main {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 24px 12px;
+}
+
+h1 {
+    margin-bottom: 24px !important;
+    text-align: center;
+}
+
+h2{
+    margin-top: 24px !important;
+}
+
+
+/* ----------form----------------*/
+form {
+    display: flex;
+    gap: 8px;
+}
+
+form>div{
+    width: 500px;
+}
+form>button {
+    width: 100px;
+    margin-top: 10px;
+    height: 100%;
+}
+
+form span {
+    color: red;
+}
+
+
+/*---------list---------*/
+#pairListContainer {
+    display: flex;
+    gap: 24px;
+}
+ul {
+    width: 100%;
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 4px !important;
+    max-height: 60vh;
+    overflow: auto;
+}
+li {
+    font-size: 24px;
+    padding: 4px;
+    width: 100%;
+    letter-spacing: 1px;
+    border-radius: 4px;
+}
+#pairListActions {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+li {
+    cursor: pointer;
+}
+li:hover{
+    background-color: #a8ffa850;
+}
+li.selected{
+    background-color: #a8ffa8;
+}
+li.selected:hover{
+    background-color: #ff9595;
+}
+
+li.selected::before {
+    content: '✓';
+    color: green;
+}

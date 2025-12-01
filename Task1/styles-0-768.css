@@ -1,0 +1,19 @@
+@media screen and (max-width: 767px) {
+    form {
+        width: 100%;
+        flex-direction: column;
+    }
+    form>div, form>button {
+        width: 100%;
+    }
+    #pairListActions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    #pairListContainer {
+        flex-direction: column;
+    }
+    ul {
+        max-height: 40vh;
+    }
+}

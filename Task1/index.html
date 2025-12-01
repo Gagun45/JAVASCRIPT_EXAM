@@ -5,10 +5,44 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Task 1</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-0-768.css">
+    <link rel="stylesheet" href="styles-768-1280.css">
+
+
 </head>
 <body>
 
+<main>
+    <h1 class="display-1">Assessment 1</h1>
+    <form name="inputForm">
+        <div class="form-floating">
+            <input class="form-control" id="pair" type="text" placeholder="Name=Value" name="pair" required>
+            <label for="pair">Enter a pair</label>
+            <span id="errorP"></span>
+        </div>
+        <button class="btn btn-primary">Add</button>
+    </form>
+
+
+    <h2>Existing pairs</h2>
+    <div id="pairListContainer">
+        <ul id="pairList">
+
+        </ul>
+        <div id="pairListActions">
+            <button type="button" class="btn btn-dark" id="sortByNameAscBtn">Name A-Z</button>
+            <button type="button" class="btn btn-dark" id="sortByNameDescBtn">Name Z-A</button>
+            <button type="button" class="btn btn-dark" id="sortByValueAscBtn">Value A-Z</button>
+            <button type="button" class="btn btn-dark" id="sortByValueDescBtn">Value Z-A</button>
+            <button type="button" class="btn btn-info" id="selectAllBtn">Select all</button>
+            <button type="button" class="btn btn-warning" id="deselectAllBtn">Deselect all</button>
+            <button type="button" class="btn btn-danger" id="deleteBtn">Delete selected</button>
+        </div>
+    </div>
+</main>
 <script src="main.js"></script>
 </body>
 </html>

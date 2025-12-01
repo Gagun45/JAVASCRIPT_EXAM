@@ -41,7 +41,14 @@ form>button {
 }
 
 form span {
+    font-weight: 600;
+}
+
+#errorSpan {
     color: red;
+}
+#successSpan {
+    color: #05ba05;
 }
 
 
@@ -51,10 +58,11 @@ form span {
     gap: 24px;
 }
 ul {
+    min-height: 100px;
     width: 100%;
     border: 1px solid gray;
     border-radius: 4px;
-    padding: 4px !important;
+    padding: 4px;
     max-height: 60vh;
     overflow: auto;
 }

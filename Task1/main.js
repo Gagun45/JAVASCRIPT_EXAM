@@ -6,7 +6,8 @@ let currentPairs = JSON.parse(localStorage.getItem('currentPairs')) || []
 // get needed elements
 const ul = document.getElementById('pairList')
 const form = document.forms['inputForm']
-const errorP = document.getElementById('errorP')
+const errorSpan = document.getElementById('errorSpan')
+const successSpan = document.getElementById('successSpan')
 
 // Initial render if there are pairs stored in local storage
 if (currentPairs.length>0) renderPairsArray(currentPairs)
@@ -16,38 +17,48 @@ function updateLocalStorage () {
     localStorage.setItem('currentPairs', JSON.stringify(currentPairs))
 }
 
-// hide error message on input
+// clear feedback messages on input
 const pairInput = form.pair
-pairInput.oninput = ()=>errorP.innerText=''
+pairInput.oninput = ()=> {
+    errorSpan.innerText = ''
+    successSpan.innerText = ''
+}
 
-//adding (validation, pushing to array, appending) new pair//
+//adding new pair//
 form.onsubmit = function (e) {
     e.preventDefault()
-    errorP.innerText=''
+
+    errorSpan.innerText=''
+    successSpan.innerText=''
+
     const stringPair = this.pair.value
     const {isValid, name, value, error} = pairValidation(stringPair)
     if (!isValid) {
-        errorP.innerText=error
+        errorSpan.innerText=error
         return
     }
 
     const pair = {name, value}
-
     currentPairs.push(pair)
     updateLocalStorage()
     appendSinglePair(pair)
 
-    this.pair.value = '' // reset input
+    //reset input and show success msg
+    this.pair.value = ''
+    successSpan.innerText='New pair successfully added'
 }
 
 // validate new pair, return {isValid, name, value, error}
 function pairValidation(pair) {
     const regex = /^\s*[A-Za-z0-9]+\s*=\s*[A-Za-z0-9]+\s*$/g
     const isValid = regex.test(pair)
+
     if (!isValid) return {isValid: false, error: 'NAME=VALUE format should be used'}
     const [name, value] = pair.split('=').map(item => item.trim())
+
     const existingPair = currentPairs.find(pair=>pair.name===name)
     if (existingPair) return {isValid: false, error: `A pair with a name "${name}" already exists`}
+
     return {isValid: true, name, value}
 }
 

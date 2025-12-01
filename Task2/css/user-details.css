@@ -1,0 +1,33 @@
+#userInfoList {
+    border: 1px solid gray;
+    padding: 4px;
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+#userInfoList ul {
+    display: flex;
+    flex-direction: column;
+    gap:4px;
+}
+#postsList {
+    border: 1px solid gray;
+    padding: 4px;
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+}
+#postsList>li {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid grey;
+    gap: 4px;
+}
+h2 {
+    text-align: center;
+    margin: 12px 0;
+}

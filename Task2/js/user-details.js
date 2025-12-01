@@ -6,12 +6,9 @@ const userId = +url.searchParams.get('userId') //userId = 0 if the param omitted
 
 function initialRender() {
     fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
-        .then(res=>res.json())
-        .then(user=>appendUser(user))
-        .catch((err)=> {
-            console.log(err);
-            appendErrorP('Failed to fetch user. Check console')
-        })
+        .then(res => res.json())
+        .then(user => appendUser(user))
+        .catch((err) => console.log(err))
 }
 
 function appendUser(user) {
@@ -29,6 +26,10 @@ function appendUser(user) {
 
     // address block
     const addressLi = document.createElement('li')
+
+    const h3address = document.createElement('h3')
+    h3address.innerText='Address'
+
     const addressLiList = document.createElement('ul')
     for (const key in user.address) {
         if (typeof user.address[key] !== 'object') {
@@ -41,12 +42,16 @@ function appendUser(user) {
 
     const geo = document.createElement('li')
     geo.innerText = `Geo: lat (${user.address.geo.lat}), lng (${user.address.geo.lng})`
-
     addressLiList.appendChild(geo)
-    addressLi.appendChild(addressLiList)
+
+    addressLi.append(h3address, addressLiList)
 
     // company block
     const companyLi = document.createElement('li')
+
+    const h3company = document.createElement('h3')
+    h3company.innerText='Company'
+
     const companyLiList = document.createElement('ul')
     for (const key in user.company) {
         const li = document.createElement('li')
@@ -54,56 +59,48 @@ function appendUser(user) {
         li.innerText = `${keyCapitalized}: ${user.company[key]}`
         companyLiList.appendChild(li)
     }
-    companyLi.append(companyLiList)
+    companyLi.append(h3company, companyLiList)
 
     userInfoList.append(addressLi, companyLi)
 
+    // post of current user button
     const getPostsButton = createGetPostsBtn()
     userInfoList.appendChild(getPostsButton)
 
     main.appendChild(userInfoList)
 }
 
-function appendErrorP(msg) {
-    const errorP = document.createElement('p')
-    errorP.innerText = msg
-    main.appendChild(errorP)
-}
-
-function createGetPostsBtn (){
+function createGetPostsBtn() {
     const button = document.createElement('button')
-    button.innerText='Posts of current user'
-    button.onclick = ()=>getPosts()
+    button.innerText = 'Posts of current user'
+    button.onclick = () => getPosts()
     return button
 }
 
-function getPosts () {
+function getPosts() {
     if (document.getElementById('postsList')) return //in case posts are already fetched and appended - just return to prevent refetch
     fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)
-        .then(res=>res.json())
-        .then(posts=>appendPosts(posts))
-        .catch((err)=> {
-            console.log(err);
-            appendErrorP('Failed to fetch posts. Check console')
-        })
+        .then(res => res.json())
+        .then(posts => appendPosts(posts))
+        .catch((err) => console.log(err))
 }
 
 function appendPosts(posts) {
 
     const h2 = document.createElement('h2')
-    h2.innerText='Posts of current user'
+    h2.innerText = 'Posts of current user'
 
     const postsList = document.createElement('ul')
     postsList.id = 'postsList'
-    posts.forEach(({title, id})=>{
+    posts.forEach(({title, id}) => {
         const li = document.createElement('li')
 
         const titleSpan = document.createElement('span')
-        titleSpan.innerText=title
+        titleSpan.innerText = title
 
         const postLink = document.createElement('a')
-        postLink.innerText='Post details'
-        postLink.href=`post-details.html?postId=${id}`
+        postLink.innerText = 'Post details'
+        postLink.href = `post-details.html?postId=${id}`
 
         li.append(titleSpan, postLink)
         postsList.appendChild(li)
